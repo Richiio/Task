@@ -1,0 +1,15 @@
+[Unit]
+Description=Demo Service for Introductory Task
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/bin/python3 /gitlab.com/richiio/intro_task/answer.py "daemon"
+Restart=always
+WorkingDirectory=/tmp
+Nice=19
+LimitNOFILE= 250000
+
+[Install]
+WantedBy=multi-user.target
