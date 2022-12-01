@@ -38,23 +38,25 @@ For Linux, Mac OS X and UNIX-based operating system, you need to change the perm
 $ chmod 755 bin/*.sh
 $ chmod -R 777 config
 ~~~
+
 These commands update the execute permissions on files in the config/ directory and shell scripts in bin/, ensuring that you can run the scripts or programs that you've compiled.
 
 
 ## Install as Service on Unix/Linux
 Following the installation guide above, after cloning the repository to your local system. This doesn't end here, as it does not install Answer at a system-level. There are some additional steps you need to take in order to manage it as a service.
 
-OrientDB ships with a script, which allows you to manage the database server as a system-level daemon. You can find it in the bin/ path of your installation directory, (that is, at $HOME/bin/answer.py
+Answer ships with a script, which allows you to manage the server as a system-level daemon. You can find it in the bin/ path of your installation directory, (that is, at $HOME/bin/answer.py
 
 The script supports three parameters:
 
-start
-stop
-status
+* start
+* stop
+* search
+
 Configuring the Script
 In order to use the script on your system, you need to edit the file to define two variables: the path to the installation directory and the user you want to run the eoserver.
 
-$ vi $ORIENTDB_HOME/bin/orientdb.sh
+$ vi $HOME/bin/answer.py
 
 !/bin/sh
 OrientDB service script
@@ -65,8 +67,8 @@ OrientDB service script
 
 # You have to SET the OrientDB installation directory here
 ORIENTDB_DIR="YOUR_ORIENTDB_INSTALLATION_PATH"
-ORIENTDB_USER="USER_YOU_WANT_ORIENTDB_RUN_WITH"
-Edit the ORIENTDB_DIR variable to indicate the installation directory. Edit the ORIENTDB_USER variable to indicate the user you want to run the database server, (for instance, orientdb).
+ORIENTDB_USER="USER_YOU_WANT_ANSWER_RUN_WITH"
+Edit the ANSWER_DIR variable to indicate the installation directory. Edit the ORIENTDB_USER variable to indicate the user you want to run the database server, (for instance, orientdb).
 
 Installing the Script
 Different operating systems and Linux distributions have different procedures when it comes to managing system daemons, as well as the procedure for starting and stopping them during boot up and shutdown. Below are generic guides for init and systemd based unix systems as well Mac OS X. For more information, check the documentation for your particular system.
@@ -74,10 +76,12 @@ Different operating systems and Linux distributions have different procedures wh
 Installing for init
 Many Unix-like operating systems such as FreeBSD, most older distributions of Linux, as well as current releases of Debian, Ubuntu and their derivatives use variations on SysV-style init for these processes. These are typically the systems that manage such processes using the service command.
 
-To install OrientDB as a service on an init-based unix or Linux system, copy the modified orientdb.sh file from $ORIENTDB_HOME/bin into /etc/init.d/:
+To install HOME as a service on an init-based unix or Linux system, copy the modified orientdb.sh file from $ORIENTDB_HOME/bin into /etc/init.d/:
 
-# cp $ORIENTDB_HOME/bin/orientdb.sh /etc/init.d/orientdb
+~~~
+cp $ORIENTDB_HOME/bin/orientdb.sh /etc/init.d/orientdb
 Once this is done, you can start and stop OrientDB using the service command:
+~~~
 
 # service orientdb start
 Starting OrientDB server daemon...
@@ -88,6 +92,7 @@ The OrientDB's package contains a service descriptor file for systemd based dist
 
 # vi /etc/systemd/system/orientdb.service
 
+~~~
 [Unit]
 Description=OrientDB Server
 After=network.target
@@ -100,6 +105,7 @@ WantedBy=multi-user.target
 User=ORIENTDB_USER
 Group=ORIENTDB_GROUP
 ExecStart=$ORIENTDB_HOME/bin/server.sh
+~~~
 
 Set the right user and group. You may want to use the absolute path instead of the environment variable $ORIENTDB_HOME. Once this file is saved, you can start and stop the OrientDB server using the systemctl command:
 
