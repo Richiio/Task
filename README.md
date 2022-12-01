@@ -25,22 +25,13 @@ Install on GlassFish
 Install on Ubuntu 12.04 VPS (DigitalOcean)
 Install on Vagrant
 
-rerequisites
-Both editions of OrientDB run on any operating system that implements the Java Virtual machine (JVM), specifically the JDK. Examples of these include:
+# Prerequisites
+Answer can run on any operating system that implements the Java Virtual machine (JVM), specifically the JDK. Examples of these include:
 
-Linux, all distributions, including ARM (Raspberry Pi, etc.)
+Linux, all distributions
 Mac OS X
 Microsoft Windows
-OrientDB requires Java, version 8 or higher, of the JDK.
-
-Note: In OSGi containers, OrientDB uses a ConcurrentLinkedHashMap implementation provided by concurrentlinkedhashmap to create the LRU based cache. This library actively uses the sun.misc package which is usually not exposed as a system package. To overcome this limitation you should add property org.osgi.framework.system.packages.extra with value sun.misc to your list of framework properties.
-
-It may be as simple as passing an argument to the VM starting the platform:
-
-$ java -Dorg.osgi.framework.system.packages.extra=sun.misc
-
-nstallation from Source
-In addition to downloading the binary packages, you also have the option of compiling OrientDB from the Community Edition source code, available on GitHub. This process requires that you install Git and Apache Maven on your system.
+Answer requires Python 3 and higher.
 
 To compile OrientDB from source code, clone the Community Edition repository, then run Maven (mvn) in the newly created directory:
 
