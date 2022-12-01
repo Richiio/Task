@@ -9,70 +9,42 @@ $ git pull origin master
 $ git checkout 2.0
 $ mvn clean install
 ~~~
+
 This will build the 2.0 branch 
 
 Building a single executable jar with OrientDB
 OrientDB for internal components like engines, operators, factories uses Java SPI Service Provider Interface. That means that the jars of OrientDB are shipped with files in META-INF/services that contains the implementation of components. Bear in mind that when building a single executable jar, you have to concatenate the content of files with the same name in different orientdb-*.jar . If you are using Maven Shade Plugin you can use Service Resource Transformer to do that.
 
-Other Resources
-To learn more about how to install OrientDB on specific environments, please refer to the guides below:
-
-Install with Docker
-Install with Ansible
-Install on Linux Ubuntu
-Install on JBoss AS
-Install on GlassFish
-Install on Ubuntu 12.04 VPS (DigitalOcean)
-Install on Vagrant
-
-# Prerequisites
-Answer can run on any operating system that implements the Java Virtual machine (JVM), specifically the JDK. Examples of these include:
-
-Linux, all distributions
-Mac OS X
-Microsoft Windows
-Answer requires Python 3 and higher.
+## Prerequisites
+Answer can run on any operating system 
+* Linux, all distributions
+* Mac OS X
+* Microsoft Windows
+* Answer requires Python 3 and higher.
 
 To compile OrientDB from source code, clone the Community Edition repository, then run Maven (mvn) in the newly created directory:
 
-$ git clone https://github.com/orientechnologies/orientdb
+~~~
+$ git clone https://github.com/Richiio/Task
 $ git checkout develop
-$ cd orientdb
+$ cd answer
 $ mvn clean install
-It is possible to skip tests:
+~~~
 
-$ mvn clean install -DskipTests
-The develop branch contains code for the next version of OrientDB. Stable versions are tagged on master branch. For each maintained version OrientDB has its own hotfix branch. As the time of writing this notes, the state of branches is:
-
-develop: work in progress for next 3.0.x release (3.0.x-SNAPSHOT)
-2.2.x: hot fix for next 2.2.x stable release (2.2.x-SNAPSHOT)
-2.1.x: hot fix for next 2.1.x stable release (2.1.x-SNAPSHOT)
-2.0.x: hot fix for next 2.0.x stable release (2.0.x-SNAPSHOT)
-last tag on master is 2.2.0
-The build process installs all jars in the local maven repository and creates archives under the distribution module inside the target directory. At the time of writing, building from branch 2.1.x gave:
-
-$ls -l distribution/target/
-total 199920
-    1088 26 Jan 09:57 archive-tmp
-     102 26 Jan 09:57 databases
-     102 26 Jan 09:57 orientdb-community-2.2.1-SNAPSHOT.dir
-48814386 26 Jan 09:57 orientdb-community-2.2.1-SNAPSHOT.tar.gz
-53542231 26 Jan 09:58 orientdb-community-2.2.1-SNAPSHOT.zip
-$
-The directory orientdb-community-2.2.1-SNAPSHOT.dir contains the OrientDB distribution uncompressed. Take a look to Contribute to OrientDB if you want to be involved.
-
-Update Permissions
+## Update Permissions
 For Linux, Mac OS X and UNIX-based operating system, you need to change the permissions on some of the files after compiling from source.
 
+~~~
 $ chmod 755 bin/*.sh
 $ chmod -R 777 config
+~~~
 These commands update the execute permissions on files in the config/ directory and shell scripts in bin/, ensuring that you can run the scripts or programs that you've compiled.
 
 
-nstall as Service on Unix/Linux
-Following the installation guide above, whether you choose to download binaries or build from source, does not install OrientDB at a system-level. There are a few additional steps you need to take in order to manage the database system as a service.
+## Install as Service on Unix/Linux
+Following the installation guide above, after cloning the repository to your local system. This doesn't end here, as it does not install Answer at a system-level. There are some additional steps you need to take in order to manage it as a service.
 
-OrientDB ships with a script, which allows you to manage the database server as a system-level daemon. You can find it in the bin/ path of your installation directory, (that is, at $ORIENTDB_HOME/bin/orientdb.sh.
+OrientDB ships with a script, which allows you to manage the database server as a system-level daemon. You can find it in the bin/ path of your installation directory, (that is, at $HOME/bin/answer.py
 
 The script supports three parameters:
 
@@ -80,14 +52,12 @@ start
 stop
 status
 Configuring the Script
-In order to use the script on your system, you need to edit the file to define two variables: the path to the installation directory and the user you want to run the database server.
+In order to use the script on your system, you need to edit the file to define two variables: the path to the installation directory and the user you want to run the eoserver.
 
 $ vi $ORIENTDB_HOME/bin/orientdb.sh
 
-#!/bin/sh
-# OrientDB service script
-#
-# Copyright (c) Orient Technologies LTD (http://www.orientechnologies.com)
+!/bin/sh
+OrientDB service script
 
 # chkconfig: 2345 20 80
 # description: OrientDb init script
@@ -118,10 +88,6 @@ The OrientDB's package contains a service descriptor file for systemd based dist
 
 # vi /etc/systemd/system/orientdb.service
 
-#
-# Copyright (c) OrientDB LTD (http://http://orientdb.com/)
-#
-
 [Unit]
 Description=OrientDB Server
 After=network.target
@@ -137,10 +103,10 @@ ExecStart=$ORIENTDB_HOME/bin/server.sh
 
 Set the right user and group. You may want to use the absolute path instead of the environment variable $ORIENTDB_HOME. Once this file is saved, you can start and stop the OrientDB server using the systemctl command:
 
-# systemctl start orientdb.service
+### systemctl start orientdb.service
 Additionally, with the orientdb.service file saved, you can set systemd to start the database server automatically during boot by issuing the enable command:
 
-# systemctl enable orientdb.service
+### systemctl enable orientdb.service
 Synchronizing state of orientdb.service with SysV init with /usr/lib/systemd/systemd-sysv-install...
 Executing /usr/lib/systemd/systemd-sysv-install enable orientdb
 Created symlink from /etc/systemd/system/multi-user.target.wants/orientdb.service to /etc/systemd/system/orientdb.service.
