@@ -23,6 +23,7 @@ class ClientRequestThread(Thread):
         self.request_string = request_string
         self.root_dir = root_dir
         self.path = ''
+        self.daemon = True
         self.response = None
         self.status_code = ''
         self.thread_header = ''
