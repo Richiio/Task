@@ -9,9 +9,8 @@ from argparse import ArgumentParser
 from socket import SO_REUSEADDR, SOCK_STREAM, error, socket, SOL_SOCKET, AF_INET
 from threading import Thread
 
-# -------------------------------------#
-########## ARGUMENT HANDLING ##########
-#-------------------------------------#
+
+# ARGUMENT HANDLING 
 
 # Initialize instance of an argument parser
 parser = ArgumentParser(description='Multi-threaded TCP Client')
@@ -25,11 +24,8 @@ parser.add_argument('-p', '--port', default=44445, type=int, help='Port over whi
 # Get the arguments
 args = parser.parse_args()
 
-#--------------------------------------#
-########## CLIENT CONSTRUCTOR ##########
-#--------------------------------------#
 
-
+# CLIENT CONSTRUCTOR ##########
 class Client:
     def __init__(self, id, address, port, message):
         self.s = socket(AF_INET, SOCK_STREAM)
@@ -59,9 +55,9 @@ class Client:
             print "\nERROR: Could not connect to ", self.address, " over port", self.port, "\n"
             raise e
 
-#------------------------------------------------#
-########## DEFINE QUEUE WORKER FUNCTION ##########
-#------------------------------------------------#
+
+# DEFINE QUEUE WORKER FUNCTION ##########
+
 
 # Create a queue to hold the tasks for the worker threads
 q = Queue(maxsize=0)
@@ -80,9 +76,8 @@ def worker():
         # Mark this task item done, thus removing it from the work queue
         q.task_done()
 
-#--------------------------------------------------#
-########## INITIATE CLIENT WORKER THREADS ##########
-#--------------------------------------------------#
+
+# INITIATE CLIENT WORKER THREADS 
 
 # Populate the work queue with a list of numbers as long as the total number of requests wished to be sent.
 # These queue items can be thought of as decrementing counters for the client thread workers.
