@@ -63,16 +63,18 @@ In order to use the script on your system, you need to edit the file to define t
 $ vi $HOME/bin/answer.py
 
 !/bin/sh
-OrientDB service script
+answer service script
 
-# chkconfig: 2345 20 80
-# description: OrientDb init script
-# processname: orientdb.sh
+~~~
+chkconfig: 2345 20 80
+description: answer init script
+processname: answer.py
+~~~
 
-# You have to SET the OrientDB installation directory here
-ORIENTDB_DIR="YOUR_ORIENTDB_INSTALLATION_PATH"
-ORIENTDB_USER="USER_YOU_WANT_ANSWER_RUN_WITH"
-Edit the ANSWER_DIR variable to indicate the installation directory. Edit the ORIENTDB_USER variable to indicate the user you want to run the database server, (for instance, orientdb).
+### You have to SET the OrientDB installation directory here
+ANSWER_DIR="YOUR_ANSWER_INSTALLATION_PATH"
+ANSWER_USER="USER_YOU_WANT_ANSWER_RUN_WITH"
+Edit the ANSWER_DIR variable to indicate the installation directory. Edit the ANSWER_USER variable to indicate the user you want to run the server.
 
 Installing the Script
 Different operating systems and Linux distributions have different procedures when it comes to managing system daemons, as well as the procedure for starting and stopping them during boot up and shutdown. Below are generic guides for init and systemd based unix systems as well Mac OS X. For more information, check the documentation for your particular system.
@@ -156,14 +158,5 @@ The installation process gives an output similar to the following one:
 The installation process setups a default server's root user password that must be changed. The orientdb-server-config.xml file is installed in /usr/local/Cellar/orientdb/<ORIENTDB_VERSION>/libexec/config/. Open the file and remove the "root" user entry. Remove the tag true at the end of the file. Start the server on interactive console:
 
 /usr/local/Cellar/orientdb/<ORIENTDB_VERSION>/libexec/bin/server.sh
-The script asks for a new password for the database's root user.
+The script asks for a new password for the server's root user.
 
-Other resources
-To learn more about how to install OrientDB on specific environment please follow the guide below:
-
-Install on Linux Ubuntu
-Install on JBoss AS
-Install on GlassFish
-Install on Ubuntu 12.04 VPS (DigitalOcean)
-Install as service on Unix, Linux and MacOSX
-Install as service on Windows
