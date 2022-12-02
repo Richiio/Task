@@ -12,9 +12,6 @@ $ mvn clean install
 
 This will build the 2.0 branch 
 
-Building a single executable jar with OrientDB
-OrientDB for internal components like engines, operators, factories uses Java SPI Service Provider Interface. That means that the jars of OrientDB are shipped with files in META-INF/services that contains the implementation of components. Bear in mind that when building a single executable jar, you have to concatenate the content of files with the same name in different orientdb-*.jar . If you are using Maven Shade Plugin you can use Service Resource Transformer to do that.
-
 ## Prerequisites
 Answer can run on any operating system 
 * Linux, all distributions
@@ -22,14 +19,21 @@ Answer can run on any operating system
 * Microsoft Windows
 * Answer requires Python 3 and higher.
 
-To compile OrientDB from source code, clone the Community Edition repository, then run Maven (mvn) in the newly created directory:
+To compile Answer from source code, clone the Task repository, in your command prompt, then start the answer server(which is the server where we are going to be receiving connections).
 
 ~~~
 $ git clone https://github.com/Richiio/Task
-$ git checkout develop
 $ cd answer
-$ mvn clean install
+$ python server.py
 ~~~
+
+Open another command prompt and run the client server using the following procedures
+~~~
+$ cd client
+$ python client.py
+~~~
+This would be used for testing purposes to see if we are getting the response from the server that we are meant to be receiving.
+
 
 ## Update Permissions
 For Linux, Mac OS X and UNIX-based operating system, you need to change the permissions on some of the files after compiling from source.
