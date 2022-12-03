@@ -132,14 +132,15 @@ Synchronizing state of answer.service with SysV init with /usr/lib/systemd/syste
 Executing /usr/lib/systemd/systemd-sysv-install enable answer
 Created symlink from /etc/systemd/system/multi-user.target.wants/answer.service to /etc/systemd/system/answer.service.
 
-###<spin>Installing for Mac OS X</spin>
+<spin>Installing for Mac OS X</spin>
+
 Manual install
 For Mac OS X:
 
 follow the steps described above, in the Configuring the Script section
 create an alias to the answer system daemon script and the console.
-$ alias answer-server=/path/to/usr/bin/answer.py
-$ alias orientdb-console=/path/to/usr/bin/console.sh
+* $ alias answer-server=/path/to/usr/bin/answer.py
+* $ alias orientdb-console=/path/to/usr/bin/console.sh
 You can now start the answer server using the following command:
 ~~~
 $ answer-server start
