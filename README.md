@@ -23,7 +23,7 @@ To compile Answer from source code, clone the Task repository, in your command p
 ~~~
 $ git clone https://github.com/Richiio/Task
 $ cd answer
-$ python server.py
+$ python answer.py
 ~~~
 
 Open another command prompt and run the client server using the following procedures
