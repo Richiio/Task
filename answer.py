@@ -173,8 +173,10 @@ DOCUMENT_ROOT = args.DOCUMENT_ROOT
 PORT = args.PORT
 HOST = ''
 
-logging.basicConfig(
+log = logging.basicConfig(
     level = logging.DEBUG,
+    # filename, log to this file
+    filename = "server.log",
     format = "%(asctime)s,%(levelname)s:%(message)s", 
     datefmt="%d-%m-%Y %H:%M:%S",
 )
