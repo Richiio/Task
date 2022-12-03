@@ -161,7 +161,7 @@ def parse_arguments():
     '''
     parser = argparse.ArgumentParser(description='Start a web server on port 44445')
     parser.add_argument('-document_root', dest='DOCUMENT_ROOT', action='store', help='Root location',
-                        default='/Users/Sarima/Projects/')
+                        default='/Users/Sarima/Desktop/Projects/')
     parser.add_argument('-PORT', dest='PORT', type=int, default='44445')
     result = parser.parse_args()
     return result
@@ -173,7 +173,7 @@ DOCUMENT_ROOT = args.DOCUMENT_ROOT
 PORT = args.PORT
 HOST = ''
 
-log = logging.basicConfig(
+logging.basicConfig(
     level = logging.DEBUG,
     # filename, log to this file
     filename = "server.log",
@@ -195,8 +195,10 @@ try:
     print("Socket bind complete")
     my_socket.listen(1)
     print("Socket is currently active and listening to requests")
+    logging.DEBUG("Server binded", my_socket.bind((HOST, PORT)))
 except:
     print("Please try reconnecting to the server")
+    logging.DEBUG("connection failed, try reconnecting", my_socket.bind((HOST, PORT))
     sys.exit(1)
 
 threads = []
@@ -209,6 +211,7 @@ Initiate forever loop to accept client requests
 '''
 while True:
     connection, address = my_socket.accept()
+    logging.DEBUG("Connection accepted", connection)
     request = connection.recv(1024).decode('utf-8')
     string_list = request.split(' ')  # Split request from spaces
     method = string_list[0]
