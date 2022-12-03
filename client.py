@@ -28,6 +28,12 @@ args = parser.parse_args()
 # CLIENT CONSTRUCTOR ##########
 class Client:
     def __init__(self, id, address, port, message):
+        '''
+        :param port: port number on which app runs
+        :param message: string message being sent to the server
+        :param address: Client's IP address
+        :param root_dir: directory on which all the necessary files exist
+        '''
         self.s = socket(AF_INET, SOCK_STREAM)
         self.id = id
         self.address = address
@@ -47,12 +53,12 @@ class Client:
             # Wait to receive data back from server
             data = self.s.recv(1024)
             # Notify that data has been received
-            print self.id, ":  received: ", data
+            print (self.id, ":  received: ", data)
             # CLOSE THE SOCKET
             self.s.close()
         # If something went wrong, notify the user
         except error as e:
-            print "\nERROR: Could not connect to ", self.address, " over port", self.port, "\n"
+            print ("\nERROR: Could not connect to ", self.address, " over port", self.port, "\n")
             raise e
 
 
