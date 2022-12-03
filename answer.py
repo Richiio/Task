@@ -127,9 +127,11 @@ def Reread_on_query(request_file, path):
     '''
     if request_file in path:
         print("String exists\n")
+        logging.DEBUG("String exists", request_file)
         return True
     else:
         print("String not found\n")
+        logiging.DEBUG("String not found", request_file)
         return False
 
 # Stripping extra payload off, client_socket is the socket of our user 
@@ -144,6 +146,7 @@ def handle_client(client_socket):
         request = client_socket.recv(1024).decode()
         if not len(request):
             print("Attempting to crash the server")
+            logging.DEBUG("Attempting to crash the server", request)
             return False
         #Decoding the length of our request after removing all spaces
         requestLength = int(request.strip()).decode()
@@ -191,8 +194,10 @@ try:
         my_socket.bind((HOST, PORT))
     except socket.error as msg:
         print("Bind failed. Error code: " + str(msg[0]) + ' Message ' + msg[1])
+        logging.DEBUG("Bind Failed", my_socket.bind((HOST, PORT))
         sys.exit()
     print("Socket bind complete")
+    logging.DEBUG("Bind completed", my_socket.bind((HOST, PORT))
     my_socket.listen(1)
     print("Socket is currently active and listening to requests")
     logging.DEBUG("Server binded", my_socket.bind((HOST, PORT)))
