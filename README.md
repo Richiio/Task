@@ -88,56 +88,63 @@ cp $ORIENTDB_HOME/bin/orientdb.sh /etc/init.d/orientdb
 Once this is done, you can start and stop OrientDB using the service command:
 ~~~
 
-# service orientdb start
-Starting OrientDB server daemon...
+~~~
+service answer start
+~~~
+
+Starting answer server daemon...
 Installing for systemd
+
 Most newer releases of Linux, especially among the RPM-based distributions like Red Hat, Fedora, and CentOS, as well as future releases of Debian and Ubuntu use systemd for these processes. These are the systems that manage such processes using the systemctl command.
-
-The OrientDB's package contains a service descriptor file for systemd based distros. The orientdb.service is placed in the bin directory. To install OrientDB copy the orientdb.service to/etc/systemd/system directory (check this, may depend on distro). Edit the file:
-
-# vi /etc/systemd/system/orientdb.service
 
 ~~~
 [Unit]
-Description=OrientDB Server
-After=network.target
-After=syslog.target
+Description=Demo Server for Introductory Task
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/bin/python3 /github.com/Richiio/Task/answer.py "daemon"
+Restart=always
+WorkingDirectory=/tmp
+Nice=19
+LimitNOFILE= 250000
 
 [Install]
 WantedBy=multi-user.target
-
-[Service]
-User=ORIENTDB_USER
-Group=ORIENTDB_GROUP
-ExecStart=$ORIENTDB_HOME/bin/server.sh
 ~~~
 
-Set the right user and group. You may want to use the absolute path instead of the environment variable $ORIENTDB_HOME. Once this file is saved, you can start and stop the OrientDB server using the systemctl command:
+Set the right user and group. You may want to use the absolute path instead of the environment variable $usr/bin. Once this file is saved, you can start and stop the server using the systemctl command:
 
-### systemctl start orientdb.service
-Additionally, with the orientdb.service file saved, you can set systemd to start the database server automatically during boot by issuing the enable command:
+~~~
+systemctl start orientdb.service
+~~~
 
-### systemctl enable orientdb.service
-Synchronizing state of orientdb.service with SysV init with /usr/lib/systemd/systemd-sysv-install...
-Executing /usr/lib/systemd/systemd-sysv-install enable orientdb
-Created symlink from /etc/systemd/system/multi-user.target.wants/orientdb.service to /etc/systemd/system/orientdb.service.
-Installing for Mac OS X
+Additionally, with the answer.service file saved, you can set systemd to start the server automatically during boot by issuing the enable command:
+
+~~~
+systemctl enable answer.service
+~~~
+
+You would see the following being displayed once you run the above command
+Synchronizing state of answer.service with SysV init with /usr/lib/systemd/systemd-sysv-install...
+Executing /usr/lib/systemd/systemd-sysv-install enable answer
+Created symlink from /etc/systemd/system/multi-user.target.wants/answer.service to /etc/systemd/system/answer.service.
+
+###<spin>Installing for Mac OS X</spin>
 Manual install
 For Mac OS X:
 
 follow the steps described above, in the Configuring the Script section
-create an alias to the OrientDB system daemon script and the console.
-$ alias orientdb-server=/path/to/$ORIENTDB_HOME/bin/orientdb.sh
-$ alias orientdb-console=/path/to/$ORIENTDB_HOME/bin/console.sh
-You can now start the OrientDB database server using the following command:
-
-$ orientdb-server start
-Once the database starts, it is accessible through the console script.
+create an alias to the answer system daemon script and the console.
+$ alias answer-server=/path/to/usr/bin/answer.py
+$ alias orientdb-console=/path/to/usr/bin/console.sh
+You can now start the answer server using the following command:
+~~~
+$ answer-server start
+~~~
+Once the server starts, it is accessible through the console script.
 
 $ orientdb-console
-
-The installation process setups a default server's root user password that must be changed. The orientdb-server-config.xml file is installed in /usr/local/Cellar/orientdb/<ORIENTDB_VERSION>/libexec/config/. Open the file and remove the "root" user entry. Remove the tag true at the end of the file. Start the server on interactive console:
-
-/usr/local/Cellar/orientdb/<ORIENTDB_VERSION>/libexec/bin/server.sh
-The script asks for a new password for the server's root user.
 
