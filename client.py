@@ -41,6 +41,12 @@ class Client:
         self.message = str(message)
 
     def run(self):
+        '''
+        Thread's main functionality
+        Sends a request to the server and receives a response from the server, 
+        after which the connection is closed. If an error was encountered, it displays the error message to the user.
+        :return: None
+        '''
         try:
             # Timeout if the no connection can be made in 5 seconds
             self.s.settimeout(5)
