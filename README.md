@@ -48,7 +48,7 @@ These commands update the execute permissions on files in the config/ directory 
 ## Install as Service on Unix/Linux
 Following the installation guide above, after cloning the repository to your local system. This doesn't end here, as it does not install Answer at a system-level. There are some additional steps you need to take in order to manage it as a service.
 
-Answer ships with a script, which allows you to manage the server as a system-level daemon. You can find it in the bin/ path of your installation directory, (that is, at $HOME/bin/answer.py
+Answer ships with a script, which allows you to manage the server as a system-level daemon. You can find it in the bin/ path of your installation directory, (that is, at $usr/bin/answer.py
 
 The script supports three parameters:
 
@@ -59,7 +59,7 @@ The script supports three parameters:
 Configuring the Script
 In order to use the script on your system, you need to edit the file to define two variables: the path to the installation directory and the user you want to run the eoserver.
 
-$ vi $HOME/bin/answer.py
+$ vi usr/bin/answer.py
 
 !/bin/sh
 answer service script
@@ -71,8 +71,11 @@ processname: answer.py
 ~~~
 
 ### You have to SET the OrientDB installation directory here
+
 ANSWER_DIR="YOUR_ANSWER_INSTALLATION_PATH"
+
 ANSWER_USER="USER_YOU_WANT_ANSWER_RUN_WITH"
+
 Edit the ANSWER_DIR variable to indicate the installation directory. Edit the ANSWER_USER variable to indicate the user you want to run the server.
 
 Installing the Script
