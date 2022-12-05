@@ -70,7 +70,7 @@ description: answer init script
 processname: answer.py
 ~~~
 
-### You have to SET the OrientDB installation directory here
+### You have to SET the Answer installation directory here
 
 ANSWER_DIR="YOUR_ANSWER_INSTALLATION_PATH"
 
@@ -79,12 +79,13 @@ ANSWER_USER="USER_YOU_WANT_ANSWER_RUN_WITH"
 Edit the ANSWER_DIR variable to indicate the installation directory. Edit the ANSWER_USER variable to indicate the user you want to run the server.
 
 Installing the Script
+ 
 Different operating systems and Linux distributions have different procedures when it comes to managing system daemons, as well as the procedure for starting and stopping them during boot up and shutdown. Below are generic guides for init and systemd based unix systems as well Mac OS X. For more information, check the documentation for your particular system.
 
 Installing for init
 Many Unix-like operating systems such as FreeBSD, most older distributions of Linux, as well as current releases of Debian, Ubuntu and their derivatives use variations on SysV-style init for these processes. These are typically the systems that manage such processes using the service command.
 
-To install HOME as a service on an init-based unix or Linux system, copy the modified orientdb.sh file from $ORIENTDB_HOME/bin into /etc/init.d/:
+To install Answer as a service on an init-based unix or Linux system, copy the modified answer.sh file from $usr/bin into /etc/init.d/:
 
 ~~~
 cp $ORIENTDB_HOME/bin/orientdb.sh /etc/init.d/orientdb
