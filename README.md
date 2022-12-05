@@ -38,7 +38,7 @@ This would be used for testing purposes to see if we are getting the response fr
 For Linux, Mac OS X and UNIX-based operating system, you need to change the permissions on some of the files after compiling from source.
 
 ~~~
-$ chmod 755 bin/*.sh
+$ chmod 755 bin/answer.py
 $ chmod -R 777 config
 ~~~
 
