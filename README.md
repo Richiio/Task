@@ -89,7 +89,7 @@ Many Unix-like operating systems such as FreeBSD, most older distributions of Li
 To install Answer as a service on an init-based unix or Linux system, copy the modified answer.sh file from $usr/bin into /etc/init.d/:
 
 ~~~
-cp $usr/bin/orientdb.sh /etc/init.d/answer
+cp $usr/bin/answer.sh /etc/init.d/answer
 Once this is done, you can start and stop Answer using the service command:
 ~~~
 
