@@ -38,9 +38,10 @@ This would be used for testing purposes to see if we are getting the response fr
 For Linux, Mac OS X and UNIX-based operating system, you need to change the permissions on some of the files after compiling from source.
 
 ~~~
-$ chmod 755 bin/answer.py
+$ chmod 755 bin/*.sh
 $ chmod -R 777 config
 ~~~
+The .sh file is the script we would love to run.
 
 These commands update the execute permissions on files in the config/ directory and shell scripts in bin/, ensuring that you can run the scripts or programs that you've compiled.
 
@@ -48,7 +49,7 @@ These commands update the execute permissions on files in the config/ directory 
 ## Install as Service on Unix/Linux
 Following the installation guide above, after cloning the repository to your local system. This doesn't end here, as it does not install Answer at a system-level. There are some additional steps you need to take in order to manage it as a service.
 
-Answer ships with a script, which allows you to manage the server as a system-level daemon. You can find it in the bin/ path of your installation directory, (that is, at $usr/bin/answer.py
+Answer ships with a script, which allows you to manage the server as a system-level daemon. You can find it in the bin/ path of your installation directory, (that is, at $usr/bin/answer.sh
 
 The script supports three parameters:
 
@@ -59,7 +60,7 @@ The script supports three parameters:
 Configuring the Script
 In order to use the script on your system, you need to edit the file to define two variables: the path to the installation directory and the user you want to run the eoserver.
 
-$ vi usr/bin/answer.py
+$ vi usr/bin/answer.sh
 
 !/bin/sh
 answer service script
@@ -67,7 +68,7 @@ answer service script
 ~~~
 chkconfig: 2345 20 80
 description: answer init script
-processname: answer.py
+processname: answer.sh
 ~~~
 
 ### You have to SET the Answer installation directory here
@@ -88,8 +89,8 @@ Many Unix-like operating systems such as FreeBSD, most older distributions of Li
 To install Answer as a service on an init-based unix or Linux system, copy the modified answer.sh file from $usr/bin into /etc/init.d/:
 
 ~~~
-cp $ORIENTDB_HOME/bin/orientdb.sh /etc/init.d/orientdb
-Once this is done, you can start and stop OrientDB using the service command:
+cp $usr/bin/orientdb.sh /etc/init.d/answer
+Once this is done, you can start and stop Answer using the service command:
 ~~~
 
 ~~~
@@ -109,7 +110,7 @@ Description=Demo Server for Introductory Task
 Type=simple
 User=root
 Group=root
-ExecStart=/usr/bin/python3 /github.com/Richiio/Task/answer.py "daemon"
+ExecStart=/usr/bin/python3 /github.com/Richiio/Task/answer.sh "daemon"
 Restart=always
 WorkingDirectory=/tmp
 Nice=19
@@ -122,7 +123,7 @@ WantedBy=multi-user.target
 Set the right user and group. You may want to use the absolute path instead of the environment variable $usr/bin. Once this file is saved, you can start and stop the server using the systemctl command:
 
 ~~~
-systemctl start orientdb.service
+systemctl start answer.service
 ~~~
 
 Additionally, with the answer.service file saved, you can set systemd to start the server automatically during boot by issuing the enable command:
